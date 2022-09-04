@@ -73,6 +73,24 @@ Curretly different kernels are available:
 2. Weight kernel: `Weight`
 3. Gaussian kernel:  `Gaussian`
 
+### Mean kernel
+
+In the mean kernel the weights of each entries are $1/N^2$, where $N$ is the kernel size. Using this filter amounts to equally average the pixels around the central one and to replace it with the result. 
+
+### Weight kernel
+
+In the weight the weights assigned to each pixel are no equal as the mean kernel. A typical example is the common centrally-weighted Kernel in which the
+center entry of the filter holds a significant fraction $f$ of the total value and the rest $1-f$ is equally divided among the remaining entries of $K$. Using a centrally-weighted Kernel means that each pixel is dominating the new value assigned to it after the convolution. Notice that $f \in (0,1]$, and $w = (1-f)/(N^2-1)$. When using a weight kernel, an extra parameter $f$ (`focus`) has to be passed at execution time (error raising otherwise)
+
+### Gaussian kernel
+
+In the gaussian kernel the weights of each entries are assigned by using a Gaussian function (in 2D in this case):
+
+$$K(x, y) = \frac{1}{2\pi\sigma}e^-\frac{x^2 + y^2}{2\sigma^2}$$
+
+where $\sigma$ is the “half-size” equivalent of the half-size of the Kernel .
+
+
 ## Compilation
 
 Clone the repository and navigate to the folder `src`. A `Makefile` is
@@ -127,5 +145,3 @@ where:
 * `image.pgm`: input image to convolve
 * `output.pgm` (optional): output where to write the image, default `blurred.pgm`
 
-
-## References
