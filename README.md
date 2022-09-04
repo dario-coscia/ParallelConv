@@ -122,7 +122,7 @@ make time src=mpi prec=float
 
 ## Usage
 
-Run the executable `tree_omp.x` (or `tree_mpi.x`) generated in
+Run the executable `blur_omp.x` (or `blur_mpi.x`) generated in
 [Compile](#compile) with:
 
 ```bash
@@ -134,7 +134,7 @@ or
 
 ```bash
 # MPI
-mpirun -np ... ./blur [`kernel type`] [`kernel size`] {`extra parameters`} [`image.pgm`] {`output.pgm`}
+mpirun -np ... ./blur_mpi.x [`kernel type`] [`kernel size`] {`extra parameters`} [`image.pgm`] {`output.pgm`}
 ```
 
 where:
