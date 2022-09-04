@@ -12,10 +12,6 @@
 #define swap(mem) (mem)
 #endif
 
-using type_vect = double;
-type_vect focus = 1.;        // defining focus
-bool printing_kernel = true; // do you want to print the used kernel?
-
 #define PRINT_KERNEL false
 
 int main(int argc, char *argv[])
@@ -30,6 +26,12 @@ int main(int argc, char *argv[])
      *   focus       : parameter for Weight kernel
      */
 
+#ifdef USE_DOUBLE_PRECISION_DATA
+    using type_vect = double;
+#else
+    using type_vect = float;
+#endif
+    type_vect focus = 1.; // defining focus
 #ifdef VERBOSE
     std::cout << "\n"
               << "starting ..."
@@ -149,7 +151,7 @@ int main(int argc, char *argv[])
                    kernel, kernel_size, kernel_size,
                    output, precision_kernel);
 #ifdef NFILE
-        //unsigned short int *result = (unsigned short int *)malloc(xsize * ysize * sizeof(unsigned short int));
+        // unsigned short int *result = (unsigned short int *)malloc(xsize * ysize * sizeof(unsigned short int));
         for (int i = 0; i < xsize; ++i)
             for (int j = 0; j < ysize; ++j)
                 source[i + j * xsize] = (unsigned short int)output[j + i * ysize];
@@ -164,11 +166,11 @@ int main(int argc, char *argv[])
         std::cout << "image correctly saved in "
                   << output_file
                   << std::endl;
-#endif //VERBOSE
-#endif //NOFILE
+#endif // VERBOSE
+#endif // NOFILE
         break;
         free(source);
-        //free(result);
+        // free(result);
     }
     default:
         std::cout << "Something went wrong aborting ... \n"

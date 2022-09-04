@@ -13,6 +13,11 @@
 #endif
 
 #define PRINT_KERNEL false
+#ifdef USE_DOUBLE_PRECISION_DATA
+using type_vect = double;
+#else
+using type_vect = float;
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +27,6 @@ int main(int argc, char *argv[])
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &pcom);
 
-    using type_vect = double;
     type_vect focus = 1.; // defining focus
 
     /******************* Handling Input start ********************/
@@ -209,7 +213,7 @@ int main(int argc, char *argv[])
             std::cout << "image correctly saved in "
                       << output_file
                       << std::endl;
-#endif //VERBOSE
+#endif // VERBOSE
             free(result);
         }
 #endif // NFILE
@@ -226,7 +230,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    //free(image);
+    // free(image);
     MPI_Finalize();
     return 0;
 }
