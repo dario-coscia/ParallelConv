@@ -110,7 +110,7 @@ features:
 | Parameter | Values                  | Explanation                                                                                                                 | Default   |
 | --------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- |
 | `src`     | `mpi`/`omp`/`none`      | Framework used for the parallelization (`none` produced a serial version of the code).                                      | `omp`     |
-| `prec`    | `float`/`double`                | Precision used to represents the values in memory for the kernel matrix.     | `float`   |
+| `prec`    | `double`                | Precision used to represents the values in memory for the kernel matrix.     | `float`   |
 
 For instance, the following produces the executable `blur_mpi.x` which prints
 the time needed to convolve an image using **MPI**, and represents data as
