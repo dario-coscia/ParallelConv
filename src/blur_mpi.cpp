@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
         convolve2d_mpi(input, xsize, ysize,
                        kernel, kernel_size, kernel_size,
                        output, precision_kernel, precision_image, MPI_COMM_WORLD);
-#ifdef NFILE
+#ifndef NFILE
         if (rank == 0)
         {
             unsigned short int *result = (unsigned short int *)malloc(xsize * ysize * sizeof(unsigned short int));

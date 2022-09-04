@@ -18,16 +18,20 @@ ifeq ($(src), mpi)
 	SRC = blur_mpi.cpp
 	COMPILER = mpic++
 	OUT = blur_mpi.x
+else ifeq ($(src), openmp)
+	SRC = blur_openmp.cpp
+	ADDITIONAL_FLAGS += -fopenmp
+	COMPILER = g++
+	OUT = blur_openmp.x
 else ifeq ($(src), none)
 	SRC = blur_serial.cpp
 	COMPILER = g++
 	OUT = blur_serial.x
+else
+	SRC = blur_serial.cpp
+	COMPILER = g++
+	OUT = blur_serial.x
 endif
-#else
-#SRC = kdtree_omp.cpp
-#ADDITIONAL_FLAGS += -D USE_OMP -fopenmp
-#COMPILER = g++
-#OUT = tree_omp.x
 
 
 # floating point number precision

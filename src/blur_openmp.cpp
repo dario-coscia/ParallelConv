@@ -1,6 +1,6 @@
 #include <iostream>
 #include "kernel.hpp"
-#include "serial_conv.hpp"
+#include "openmp_conv.hpp"
 #include "read_write_image.h"
 
 #if ((0x100 & 0xf) == 0x0)
