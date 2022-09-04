@@ -109,7 +109,7 @@ features:
 
 | Parameter | Values                  | Explanation                                                                                                                 | Default   |
 | --------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `src`     | `mpi`/`omp`/`none`      | Framework used for the parallelization (`none` produced a serial version of the code).                                      | `omp`     |
+| `src`     | `mpi`/`omp`/`none`      | Framework used for the parallelization (`none` produced a serial version of the code).                                      |      |
 | `prec`    | `double`                | Precision used to represents the values in memory for the kernel matrix.     | `float`   |
 
 For instance, the following produces the executable `blur_mpi.x` which prints
