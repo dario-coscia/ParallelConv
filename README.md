@@ -145,3 +145,4 @@ where:
 * `image.pgm`: input image to convolve
 * `output.pgm` (optional): output where to write the image, default `blurred.pgm`
 
+if interested, there is a test picture in `test` folder. Also a program that checks the percentage of not correct pixel in the blurred image is reported (useful to test that serial and parallel implementation agree).
