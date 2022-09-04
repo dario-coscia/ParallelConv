@@ -1,8 +1,11 @@
 #include <iostream>
 #include <vector>
+#include "stopwatch.hpp"
 #ifdef _OPENMP
 #include <omp.h>
 #endif
+
+namespace sw = stopwatch;
 
 template <typename T, typename OT, typename OOT>
 void convolve2d(T &input, const int input_rows, const int input_cols,
@@ -10,6 +13,10 @@ void convolve2d(T &input, const int input_rows, const int input_cols,
                 T &output,
                 OOT precision_kernel)
 {
+#ifdef TIME
+    sw::Stopwatch my_watch;
+    my_watch.start();
+#endif
 
     const int dx = kernel_size_col / 2;
     const int dy = kernel_size_row / 2;
@@ -41,4 +48,19 @@ void convolve2d(T &input, const int input_rows, const int input_cols,
             output[row * input_cols + col] = tmp;
         }
     }
+
+#ifdef TIME
+    auto elapsed_s = my_watch.elapsed();
+
+#ifdef VERBOSE
+    std::cout << "image blurred! \n"
+              << "\n"
+              << std::endl;
+#endif
+    std::cout << "Elapsed time: "
+              << (float)elapsed_s / 1000
+              << " s"
+              << std::endl;
+
+#endif
 }
