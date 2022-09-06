@@ -125,14 +125,14 @@ Run the executable `blur_omp.x` (or `blur_mpi.x`) generated in
 
 ```bash
 # OpenMP
-TODO...
+OMP_NUM_THREADS=... ./blur_openmp.x [kernel type] [kernel size] {extra parameters} [image.pgm] {output.pgm}
 ```
 
 or
 
 ```bash
 # MPI
-mpirun -np ... ./blur_mpi.x [`kernel type`] [`kernel size`] {`extra parameters`} [`image.pgm`] {`output.pgm`}
+mpirun -np ... ./blur_mpi.x [kernel type] [kernel size] {extra parameters} [image.pgm] {output.pgm}
 ```
 
 where:
