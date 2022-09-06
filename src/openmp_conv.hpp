@@ -57,10 +57,14 @@ void convolve2d(T &input, const int input_rows, const int input_cols,
               << "\n"
               << std::endl;
 #endif
+#ifdef TEST
+    std::cout << elapsed_s << std::endl;
+#else
     std::cout << "Elapsed time: "
               << (float)elapsed_s / 1000
               << " s"
               << std::endl;
 
+#endif
 #endif
 }

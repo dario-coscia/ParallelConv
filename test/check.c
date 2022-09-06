@@ -1,5 +1,3 @@
-// Nice program made by my collegue Francesco Tomba, check https://github.com/lykos98
-
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>

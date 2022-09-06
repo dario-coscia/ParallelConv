@@ -2,9 +2,10 @@
 #
 # make verbose   ----> Show the textual representation of the program in execution.
 # make nfile     ----> Does not save the blurred image output as PGM image.
-# make time      ----> Show the time it took to perform the convolution (one run only).
+# make time      ----> Show the time it took to perform the convolution (one run only, blurred image not saved).
 # make debug	 ----> The binary produced will show debug messages.
 # make leaks	 ----> Produces an executable which can be used to find find memory leaks.
+# make test      ----> Prints only the time of execution (ms)
 # make clean	 ----> Clean the folder (removes executable/precompiled headers files)
 
 .DEFAULT_GOAL := output
@@ -48,13 +49,16 @@ nfile:
 	$(COMPILER) $(FLAGS) $(HPC_FLAGS) $(ADDITIONAL_FLAGS) -D NFILE $(UTILITIES) $(SRC) -o $(OUT)
 
 time:
-	$(COMPILER) $(FLAGS) $(HPC_FLAGS) $(ADDITIONAL_FLAGS) -D TIME $(UTILITIES) $(SRC) -o $(OUT)
+	$(COMPILER) $(FLAGS) $(HPC_FLAGS) $(ADDITIONAL_FLAGS) -D TIME -D NFILE $(UTILITIES) $(SRC) -o $(OUT)
 
 debug:
 	$(COMPILER) $(FLAGS) $(HPC_FLAGS) $(ADDITIONAL_FLAGS) -D NDEBUG $(UTILITIES) $(SRC) -o $(OUT)
 
 leaks:
 	$(COMPILER) $(FLAGS) $(ADDITIONAL_FLAGS) -static-libasan -fsanitize=address -g -D VERBOSE -D TIME $(UTILITIES) $(SRC) -o $(OUT)
+
+test:
+	$(COMPILER) $(FLAGS) $(ADDITIONAL_FLAGS) -D TEST -D TIME -D NFILE $(UTILITIES) $(SRC) -o $(OUT)
 
 clean:
 	rm *.x
