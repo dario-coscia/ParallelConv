@@ -61,9 +61,7 @@ The strategy employed for the parallelization with MPI consists in dividing in s
 
 ### OpenMP
 
-The strategy is very similar to the one presented in [MPI](#mpi), we use
-[task](https://www.openmp.org/wp-content/uploads/sc15-openmp-CT-MK-tasking.pdf)s
-to distribute the work easily.
+The strategy implemented divides the workload by the use of a `#pragma parallel for` and using openmp threads.
 
 ## Kernel
 
