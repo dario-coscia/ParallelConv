@@ -5,7 +5,7 @@ A parallel 2-dimensional convolution implementation in C++17 for image blurring 
 
 Blurring is a very common operation in many fields, ranging from image vision to medical science to astrophysics. Although the blurring concept is commonly associated to a post- processing step in digital photography, mathematically blurring is well defined as a cross correlation between the input signal $I$ and the kernel $K$. More formally we define the cross correlation operator $\ast$ as:
 
-$$( I\ast  K)(\mathbf x)=\int_{-\infty}^{\infty}  I(\mathbf x + \boldsymbol\tau) K(\boldsymbol\tau)d\tau.$$
+$$( I\ast  K)(\mathbf x)=\int_{-\infty}^{\infty}  I(\mathbf x + \boldsymbol\tau) K(\boldsymbol\tau)d\boldsymbol\tau.$$
 
 In this repository we implemented parallel blurring for 2D onechannel images (2-dimensional matrices), i.e. the cross correlation operator is re-defined as:
 
