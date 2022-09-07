@@ -1,3 +1,10 @@
+//============================================================
+// Title:  Serial convolution implementation, main program
+// Author: Dario Coscia - https://github.com/dario-coscia
+// Date:   7 Sept 2022
+// License: MIT
+//============================================================
+
 #include <iostream>
 #include "kernel.hpp"
 #include "serial_conv.hpp"
