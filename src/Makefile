@@ -24,6 +24,11 @@ else ifeq ($(src), openmp)
 	ADDITIONAL_FLAGS += -fopenmp
 	COMPILER = g++
 	OUT = blur_openmp.x
+else ifeq ($(src), hybrid)
+	SRC = blur_hybrid.cpp
+	ADDITIONAL_FLAGS += -fopenmp
+	COMPILER = mpic++
+	OUT = blur_hybrid.x
 else ifeq ($(src), none)
 	SRC = blur_serial.cpp
 	COMPILER = g++
@@ -43,7 +48,7 @@ endif
 
 
 verbose:
-	$(COMPILER) $(FLAGS) $(ADDITIONAL_FLAGS) -g -D VERBOSE -D TIME $(UTILITIES) $(SRC) -o $(OUT)
+	$(COMPILER) $(FLAGS)  $(HPC_FLAGS) $(ADDITIONAL_FLAGS) -g -D VERBOSE -D TIME $(UTILITIES) $(SRC) -o $(OUT)
 
 nfile:
 	$(COMPILER) $(FLAGS) $(HPC_FLAGS) $(ADDITIONAL_FLAGS) -D NFILE $(UTILITIES) $(SRC) -o $(OUT)
@@ -58,7 +63,7 @@ leaks:
 	$(COMPILER) $(FLAGS) $(ADDITIONAL_FLAGS) -static-libasan -fsanitize=address -g -D VERBOSE -D TIME $(UTILITIES) $(SRC) -o $(OUT)
 
 test:
-	$(COMPILER) $(FLAGS) $(ADDITIONAL_FLAGS) -D TEST -D TIME -D NFILE $(UTILITIES) $(SRC) -o $(OUT)
+	$(COMPILER) $(FLAGS)  $(HPC_FLAGS) $(ADDITIONAL_FLAGS) -D TEST -D TIME -D NFILE $(UTILITIES) $(SRC) -o $(OUT)
 
 clean:
 	rm *.x
