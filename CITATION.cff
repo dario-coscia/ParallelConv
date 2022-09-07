@@ -1,0 +1,9 @@
+cff-version: 0.0.1
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Coscia"
+  given-names: "Dario"
+title: "ParallelConv"
+version: 0.0.1
+date-released: 2022-09-07
+url: ""
