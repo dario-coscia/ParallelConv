@@ -107,7 +107,7 @@ features:
 
 | Parameter | Values                  | Explanation                                                                                                                 | Default   |
 | --------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `src`     | `mpi`/`omp`/`none`      | Framework used for the parallelization (`none` produced a serial version of the code).                                      |    `none`  |
+| `src`     | `mpi`/`omp`/`hybrid`/`none`      | Framework used for the parallelization (`none` produced a serial version of the code).                                      |    `none`  |
 | `prec`    | `double`                | Precision used to represents the values in memory for the kernel matrix.     | `float`   |
 
 For instance, the following produces the executable `blur_mpi.x` which prints
@@ -133,6 +133,13 @@ or
 ```bash
 # MPI
 mpirun -np ... ./blur_mpi.x [kernel type] [kernel size] {extra parameters} [image.pgm] {output.pgm}
+```
+
+or
+
+```bash
+# Hybrid (MPI + OpenMP)
+OMP_NUM_THREADS=... mpirun -np ... ./blur_hybrid.x [kernel type] [kernel size] {extra parameters} [image.pgm] {output.pgm}
 ```
 
 where:
