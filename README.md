@@ -1,5 +1,5 @@
 # ParallelConv
-A parallel 2-dimensional convolution implementation in C++17 for image blurring based on MPI, openMP approaches.
+A parallel 2-dimensional convolution implementation in C++17 for image blurring based on MPI, openMP and hybrid approaches.
 
 ## Summary
 
