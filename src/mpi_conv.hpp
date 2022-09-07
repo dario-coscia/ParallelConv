@@ -1,3 +1,10 @@
+//============================================================
+// Title:  Convolution implementation in MPI
+// Author: Dario Coscia - https://github.com/dario-coscia
+// Date:   7 Sept 2022
+// License: MIT
+//============================================================
+
 #include <iostream>
 #include <vector>
 #include "mpi.h"
