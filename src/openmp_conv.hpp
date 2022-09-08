@@ -32,7 +32,7 @@ void convolve2d(T &input, const int input_rows, const int input_cols,
     OOT tmp;
 
 #pragma omp parallel
-#pragma omp for private(tmp, x, y, index_input, index_kernel)
+#pragma omp for private(tmp, x, y, index_input, index_kernel) nowait
     for (int row = 0; row < input_rows; ++row)
     {
         for (int col = 0; col < input_cols; ++col)
