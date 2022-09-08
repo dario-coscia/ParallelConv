@@ -165,7 +165,7 @@ void convolve2d_hybrid(T &input, const int rows, const int columns,
 #endif
 
 #pragma omp parallel
-#pragma omp for private(tmp, x, y, index_input, index_kernel)
+#pragma omp for private(tmp, x, y, index_input, index_kernel) nowait
         for (int row = 0; row < row_output_mat; ++row)
         {
             for (int col = 0; col < columns; ++col)
