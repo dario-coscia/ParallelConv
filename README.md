@@ -43,7 +43,7 @@ for (row = 0; row < input_rows; ++row)
 .... // other stuff
 ```
 
-**Note**: `PGM` format is used for images. Matrix are saved in a `std::vector` templated with `unsigned short int` if two byte are needed for representing the image (`maximum value > 255`), otherwise `unsigned char` (one byte representation) is enough. The kernel representation is templated (default `float`), it is easily changable by chaning the flag `prec` in the `make` command, check [Compile](#compile). 
+**Note**: `PGM` format is used for images. Matrix are saved in a `std::vector` templated with `unsigned short int` if two byte are needed for representing the image (`maximum value > 255`), otherwise `unsigned char` (one byte representation) is enough. The kernel representation is templated (default `float`), it is easily changable by changing the flag `prec` in the `make` command, check [Compile](#compile). 
 
 ## Parallelization
 
