@@ -171,8 +171,52 @@ int main(int argc, char *argv[])
     {
     case 1:
     {
+        type_vect precision_kernel; // variable to pass precision type for std::vector
+        unsigned char precision_image;
+        auto kernel = create_matrix(kernel_size, kernel_size, precision_kernel); // kernel
+        choose_kernel(kernel, kernel_type, focus, PRINT_KERNEL);
+        auto input = create_matrix(xsize, ysize, precision_image);  // input
+        auto output = create_matrix(xsize, ysize, precision_image); // output
+
         if (rank == 0)
-            std::cout << "non implemented" << std::endl;
+        {
+            unsigned char *source = (unsigned char *)image; // casting
+            for (int i = 0; i < xsize; ++i)
+                for (int j = 0; j < ysize; ++j)
+                    input[i * ysize + j] = source[i + j * xsize];
+#ifdef VERBOSE
+            std::cout << "blurring the image ..."
+                      << std::endl;
+#endif
+        }
+
+        // Parallel Convolution
+        MPI_Barrier(MPI_COMM_WORLD);
+        convolve2d_mpi(input, xsize, ysize,
+                       kernel, kernel_size, kernel_size,
+                       output, precision_kernel, precision_image, MPI_COMM_WORLD);
+#ifndef NFILE
+        if (rank == 0)
+        {
+            unsigned char *result = (unsigned char *)malloc(xsize * ysize * sizeof(unsigned char));
+            for (int i = 0; i < xsize; ++i)
+                for (int j = 0; j < ysize; ++j)
+                    result[i + j * xsize] = (unsigned char)output[j + i * ysize];
+
+            char *file_out = const_cast<char *>(output_file.c_str());
+
+            if (I_M_LITTLE_ENDIAN)
+                swap_image(result, xsize, ysize, maxval);
+
+            write_pgm_image(result, maxval, xsize, ysize, file_out);
+#ifdef VERBOSE
+            std::cout << "image correctly saved in "
+                      << output_file
+                      << std::endl;
+#endif // VERBOSE
+            free(result);
+        }
+#endif // NFILE
         break;
     }
 

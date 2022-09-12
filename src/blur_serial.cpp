@@ -133,8 +133,44 @@ int main(int argc, char *argv[])
     {
     case 1:
     {
-        std::cout << "non implemented" << std::endl;
+        type_vect precision_kernel; // variable to pass precision type for std::vector
+        unsigned char precision_image;
+        auto kernel = create_matrix(kernel_size, kernel_size, precision_kernel); // kernel
+        choose_kernel(kernel, kernel_type, focus, PRINT_KERNEL);
+        auto input = create_matrix(xsize, ysize, precision_image);  // input
+        auto output = create_matrix(xsize, ysize, precision_image); // output
+        unsigned char *source = (unsigned char *)image;             // casting
+        for (int i = 0; i < xsize; ++i)
+            for (int j = 0; j < ysize; ++j)
+                input[i * ysize + j] = source[i + j * xsize];
+#ifdef VERBOSE
+        std::cout << "blurring the image ..."
+                  << std::endl;
+#endif
+
+        convolve2d(input, xsize, ysize,
+                   kernel, kernel_size, kernel_size,
+                   output, precision_kernel);
+#ifndef NFILE
+        for (int i = 0; i < xsize; ++i)
+            for (int j = 0; j < ysize; ++j)
+                source[i + j * xsize] = (unsigned char)output[j + i * ysize];
+
+        char *file_out = const_cast<char *>(output_file.c_str());
+
+        if (I_M_LITTLE_ENDIAN)
+            swap_image(source, xsize, ysize, maxval);
+
+        write_pgm_image(source, maxval, xsize, ysize, file_out);
+#ifdef VERBOSE
+        std::cout << "image correctly saved in "
+                  << output_file
+                  << std::endl;
+#endif // VERBOSE
+#endif // NOFILE
         break;
+        free(source);
+        // free(result);
     }
 
     case 2:
