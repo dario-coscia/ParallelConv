@@ -151,3 +151,5 @@ where:
 * `output.pgm` (optional): output where to write the image, default `blurred.pgm`
 
 if interested, there is a test picture in `test` folder. Also a program that checks the percentage of not correct pixel in the blurred image is reported (useful to test that serial and parallel implementation agree).
+
+**Note**: We assume that your are compiling using g++ for serial and OpenMP implementation, while [mpic++](https://www.open-mpi.org/doc/v3.0/man1/mpic++.1.php) for MPI and hybrid. Tests on MPI and hybrid are done on openmpi-4.1.1 and using gnu-9.3.0
